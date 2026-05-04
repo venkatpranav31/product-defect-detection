@@ -1,0 +1,56 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg
+*.egg-info/
+dist/
+build/
+*.so
+
+# Virtual Environments
+venv/
+env/
+.env
+.venv/
+
+# Data (too large for git — use Git LFS or DVC)
+data/raw/
+data/processed/
+data/augmented/
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+!data/sample/
+
+# Model Checkpoints (use Git LFS or store in cloud)
+outputs/models/*.pth
+outputs/models/*.pt
+!outputs/models/.gitkeep
+
+# Logs & Reports
+outputs/logs/
+!outputs/logs/.gitkeep
+outputs/reports/*.png
+outputs/reports/*.json
+!outputs/reports/.gitkeep
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# TensorBoard
+runs/

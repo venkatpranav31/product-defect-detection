@@ -1,0 +1,57 @@
+# ============================================================
+# Product Defect Detection - Configuration
+# ============================================================
+
+model:
+  name: resnet50
+  num_classes: 2
+  pretrained: true
+  freeze_layers: 3          # Freeze first N layer groups (0=none, 4=all backbone)
+  dropout_rate: 0.4
+
+data:
+  image_size: 224
+  num_workers: 4
+  classes:
+    0: non_defective
+    1: defective
+  # Normalization (ImageNet stats)
+  mean: [0.485, 0.456, 0.406]
+  std:  [0.229, 0.224, 0.225]
+
+training:
+  epochs: 30
+  batch_size: 32
+  learning_rate: 0.001
+  weight_decay: 0.0001
+  optimizer: adamw           # adam | adamw | sgd
+  scheduler: cosine          # cosine | step | plateau
+  patience: 5                # early stopping patience
+  mixed_precision: true
+  seed: 42
+
+augmentation:
+  train:
+    random_horizontal_flip: true
+    random_vertical_flip: false
+    random_rotation: 15
+    color_jitter:
+      brightness: 0.2
+      contrast: 0.2
+      saturation: 0.2
+    random_erasing: true
+    gaussian_blur: true
+  val:
+    resize_only: true
+
+paths:
+  data_dir: data/processed
+  output_dir: outputs/models
+  log_dir: outputs/logs
+  report_dir: outputs/reports
+  checkpoint: best_model.pth
+
+inference:
+  confidence_threshold: 0.7
+  batch_size: 16
+  target_fps: 20
